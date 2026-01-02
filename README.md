@@ -84,31 +84,37 @@ commit the code as task-3
 Answers to Questions above :-
 
 Question 1: Describe your implementation approach and the key decisions you made.
+
 Answer 1: In implementing the MessagesController, I followed RESTful principles to ensure that 
 each endpoint corresponds to a specific action on the message resource. IMessageRepository was already injected into the controller, promoting loose coupling and easier testing. 
 Each CRUD operation was implemented with appropriate HTTP methods (GET, POST, PUT, DELETE) and status codes 
-to reflect the outcome of each operation. Business Validations was not added explicitly but whatever the asp.net core provides by default.
+to reflect the outcome of each operation. Query/Body parameter(s) Validations was not added explicitly but whatever 
+the asp.net core provides by default.
 
 Question 2: What would you improve or change if you had more time?
+
 Answer 2:With more time, I would move business rules and validation logic out of the controller into a dedicated logic 
 or service layer to improve separation of concerns and testability. 
 I would also introduce structured validation, consistent error handling, and unit tests for the business logic.
-For a production environment, I would additionally consider persistence beyond in-memory storage, 
-improved logging and observability, and better handling of edge cases.
+I would like to start development as a TDD approach to ensure better test coverage from the beginning.	
+
 
 Question 3: How did you approach the validation requirements and why?
+
 Answer 3: I centralized validation inside the business logic layer to ensure that all rules are enforced consistently, 
 regardless of how the logic is consumed. This keeps controllers thin and focused on HTTP concerns while 
 making the validation logic easier to test and maintain. Grouping validation errors also allows multiple issues to be 
 reported in a single response which was provided and asked as part of the Results record class.
 
 Question 4: What changes would you make to this implementation for a production environment?
+
 Answer 4: For a production environment, I would implement persistent storage (e.g., a database) instead of in-memory storage 
 to ensure data durability. I would also enhance security measures, such as authentication and authorization, to protect
 sensitive data and operations. Additionally, I would incorporate logging and monitoring to track 
 application behavior and performance in real-time.
 
 Question 5: Explain your testing strategy and the tools you chose.
+
 Answer 5: I focused my tests on the business logic layer because it contains all validation rules and decision-making logic. 
 By testing the logic layer in isolation, I can verify behavior deterministically 
 without involving controllers, HTTP concerns, or infrastructure.
@@ -119,6 +125,7 @@ expected outcomes.
 Each test targets a single business rule or scenario, keeping the tests focused and easy to understand.
 
 Question 6: What other scenarios would you test in a real-world application?
+
 Answer 6: In a real-world application, I would extend testing to cover the following areas:
 Boundary and edge cases: Testing minimum and maximum title and content lengths, empty or malformed inputs, and invalid identifiers.
 Concurrency scenarios: Verifying correct behavior when multiple requests attempt to create, update, or delete messages simultaneously.
